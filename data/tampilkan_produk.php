@@ -1,18 +1,18 @@
 <?php
 require 'db.php';
 
-function tampilkanProduk(): void {
+function tampilkanProduk(): array {
     $conn = connectDB();
 
     $result = $conn->query("CALL tampilkan_produk()");
 
+    $produk = [];
+
     while ($row = $result->fetch_assoc()) {
-        echo "ID: {$row['id']} | Nama: {$row['nama']} | Harga: Rp{$row['harga']} | Stok: {$row['stok']} \n";
+        $produk[] = $row;
     }
 
     $conn->close();
+    return $produk;
 }
-
-// Contoh panggilan fungsi:
-tampilkanProduk();
 ?>
